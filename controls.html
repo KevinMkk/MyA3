@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sky Kingdom VR - Controls</title>
+
+<style>
+    body {
+        margin: 0;
+        background: linear-gradient(#0b0f2a, #000);
+        color: white;
+        font-family: Arial;
+
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+
+        /* IMPORTANT: allow scrolling instead of clipping */
+        align-items: flex-start;
+
+        padding: 40px 10px;
+
+        overflow-y: auto;
+    }
+
+    .panel {
+        width: 80%;
+        max-width: 900px;
+
+        background: rgba(20,20,20,0.85);
+        padding: 30px;
+        border-radius: 12px;
+
+        box-shadow: 0 0 25px rgba(255,255,255,0.15);
+
+        /* prevents top cut-off */
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+
+    h1 {
+        margin-top: 0;
+        font-size: 40px;
+        text-align: center;
+    }
+
+    h2 {
+        margin-top: 25px;
+        color: #9ecbff;
+    }
+
+    p {
+        line-height: 1.6;
+        font-size: 15px;
+    }
+
+    .section {
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        padding: 12px 18px;
+        border: none;
+        border-radius: 8px;
+        background: #222;
+        color: white;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    .btn:hover {
+        background: #444;
+    }
+
+    .back {
+        display: block;
+        text-align: center;
+    }
+
+    ul {
+        line-height: 1.8;
+    }
+
+    .highlight {
+        color: #6ec1ff;
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+
+    <h1>Sky Kingdom VR</h1>
+
+    <!-- ================= MOVEMENT ================= -->
+    <div class="section">
+
+        <h2>🧭 Movement Controls</h2>
+
+        <ul>
+            <li><span class="highlight">W / A / S / D</span> → Move forward / left / backward / right</li>
+
+            <li><span class="highlight">Arrow Keys (↑ ↓ ← →)</span> → Alternative movement control mode</li>
+
+            <li><span class="highlight">Mouse</span> → Look around (camera rotation)</li>
+
+            <li><span class="highlight">Shift</span> → Sprint (hold for faster movement)</li>
+
+            <li><span class="highlight">Right Shift</span> → Toggle control mode:
+                <ul>
+                    <li>Arrow Keys = Turn + Move Forward</li>
+                    <li>OR Arrow Keys = Strafe Left/Right</li>
+                </ul>
+            </li>
+
+            <li><span class="highlight">Space</span> → Jump / rise into air</li>
+
+            <li><span class="highlight">C</span> → Descend / fly down</li>
+        </ul>
+
+    </div>
+
+    <!-- ================= CLOUD WORLD ================= -->
+    <div class="section">
+
+        <h2>☁ Cloud Navigation System</h2>
+
+        <p>
+            The world is structured as floating cloud regions.
+            Each major destination exists in a directional cloud zone:
+        </p>
+
+        <ul>
+            <li><span class="highlight">Bokong Nature Reserve</span> → WEST clouds</li>
+            <li><span class="highlight">Ts'ehlanyane National Park</span> → SOUTH clouds</li>
+            <li><span class="highlight">Afriski</span> → EAST clouds</li>
+        </ul>
+
+        <p>
+            You must fly or walk into the correct cloud region to reach teleport zones.
+        </p>
+
+    </div>
+
+    <!-- ================= MAP SYSTEM ================= -->
+    <div class="section">
+
+        <h2>🗺 Map System</h2>
+
+        <ul>
+            <li><span class="highlight">M</span> → Open / Close Map</li>
+            <li>Map shows real-world locations in Lesotho</li>
+            <li>You can either:
+                <ul>
+                    <li>Instant teleport (if enabled)</li>
+                    <li>Receive directional guidance</li>
+                </ul>
+            </li>
+            <li>Map pauses the game and frees the mouse</li>
+        </ul>
+
+    </div>
+
+    <!-- ================= GAME SYSTEM ================= -->
+    <div class="section">
+
+        <h2>🎮 Gameplay Systems</h2>
+
+        <ul>
+            <li><span class="highlight">Teleport Zones</span> → Floating cloud portals in world</li>
+            <li><span class="highlight">T</span> → Return to start location</li>
+            <li><span class="highlight">F</span> → Interact with doors/objects</li>
+            <li>Game can switch between:
+                <ul>
+                    <li>Instant teleport mode</li>
+                    <li>Navigation guidance mode</li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="section">
+
+        <h2>⌨️ ESC & Menu System</h2>
+
+        <ul>
+
+            <li><span class="highlight">ESC</span> → Opens and closes the in-game menu</li>
+
+            <li><span class="highlight">☰ Menu Button</span> → Same function as ESC</li>
+
+            <li>When the menu is opened:
+                <ul>
+                    <li>Mouse cursor is unlocked for UI interaction</li>
+                    <li>The player can interact with menu options</li>
+                    <li>Camera control is temporarily released from mouse input</li>
+                </ul>
+            </li>
+
+            <li>When the menu is closed:
+                <ul>
+                    <li>Mouse cursor is locked back to the game</li>
+                    <li>Camera control resumes normally</li>
+                </ul>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <div class="section">
+
+        <h2>📋 In-Game Menu Options</h2>
+
+        <ul>
+
+            <li><span class="highlight">Controls</span> → Opens detailed movement and gameplay instructions</li>
+
+            <li><span class="highlight">Map</span> → Opens world map showing locations in Lesotho</li>
+
+            <li><span class="highlight">Teleport Mode</span> → Switches between:
+                <ul>
+                    <li>Instant Teleport → Select location to travel immediately</li>
+                    <li>Direction Mode → Shows cloud navigation instructions instead of teleporting</li>
+                </ul>
+            </li>
+
+            <li><span class="highlight">Restart</span> → Reloads the current scene from the beginning</li>
+
+            <li><span class="highlight">Exit</span> → Returns to the main menu screen</li>
+
+        </ul>
+
+    </div>
+
+    <!-- ================= BUTTONS ================= -->
+    <div class="back">
+
+        <button class="btn" onclick="location.href='index.html'">
+            ← Back to Main Menu
+        </button>
+
+        <button class="btn" onclick="location.href='game.html'">
+            Enter Game
+        </button>
+
+    </div>
+
+</div>
+
+</body>
+</html>
