@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>Sky Kingdom VR</title>
+
+<style>
+
+body{
+    margin:0;
+    background:#000;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    width:100vw;
+    height:100vh;
+}
+
+/* ========================================= */
+/* GAME FRAME */
+/* ========================================= */
+
+#gameFrame{
+
+    width:95vw;
+    height:95vh;
+
+    border:4px solid white;
+    border-radius:12px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    box-shadow:
+        0 0 30px rgba(255,255,255,0.3);
+
+    background:black;
+}
+
+/* ========================================= */
+/* UNITY */
+/* ========================================= */
+
+#unityCanvas{
+
+    width:100%;
+    height:100%;
+
+    display:block;
+}
+
+/* ========================================= */
+/* MENU BUTTON */
+/* ========================================= */
+
+#menuBtn{
+
+    position:absolute;
+
+    top:14px;
+    right:14px;
+
+    width:52px;
+    height:52px;
+
+    border:none;
+    border-radius:12px;
+
+    background:rgba(20,20,20,0.9);
+
+    color:white;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    z-index:300;
+
+    transition:0.2s;
+}
+
+#menuBtn:hover{
+
+    background:#333;
+}
+
+/* ========================================= */
+/* SIDE MENU */
+/* ========================================= */
+
+.sideMenu{
+
+    position:absolute;
+
+    top:0;
+    right:0;
+
+    width:300px;
+    height:100%;
+
+    background:rgba(15,15,15,0.96);
+
+    backdrop-filter:blur(6px);
+
+    z-index:200;
+
+    display:flex;
+    flex-direction:column;
+
+    padding:20px;
+
+    box-sizing:border-box;
+
+    transition:transform 0.25s ease;
+}
+
+.sideMenu.hidden{
+
+    transform:translateX(100%);
+}
+
+.menuHeader{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    color:white;
+
+    margin-bottom:20px;
+}
+
+.menuItem{
+
+    margin-bottom:12px;
+
+    padding:14px;
+
+    border:none;
+    border-radius:10px;
+
+    background:#222;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:0.2s;
+}
+
+.menuItem:hover{
+
+    background:#333;
+}
+
+/* ========================================= */
+/* MAP */
+/* ========================================= */
+
+#mapOverlay{
+
+    position:absolute;
+
+    top:5%;
+    left:5%;
+
+    width:90%;
+    height:90%;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:150;
+
+    background:rgba(0,0,0,0.85);
+
+    border-radius:12px;
+}
+
+#mapContainer{
+
+    width:90%;
+    height:85%;
+
+    background:#111;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+#map{
+
+    width:100%;
+    height:100%;
+}
+
+#topBar{
+
+    position:absolute;
+
+    top:12.5px;
+    left:200px;
+
+    z-index:20;
+
+    display:flex;
+
+    gap:10px;
+}
+
+.uiButton{
+
+    background:#222;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+#directionBox{
+
+    position:absolute;
+
+    bottom:10px;
+    left:10px;
+
+    z-index:20;
+
+    background:rgba(0,0,0,0.75);
+
+    color:white;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    font-family:Arial;
+
+    max-width:320px;
+}
+
+/* ========================================= */
+/* CONTROLS OVERLAY */
+/* ========================================= */
+
+.overlay{
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:rgba(0,0,0,0.7);
+
+    z-index:250;
+}
+
+.overlay.hidden{
+
+    display:none;
+}
+
+.overlayBox{
+
+    width:500px;
+
+    max-width:90%;
+
+    background:#111;
+
+    color:white;
+
+    padding:30px;
+
+    border-radius:14px;
+
+    position:relative;
+}
+
+.overlayBox pre{
+
+    white-space:pre-wrap;
+
+    line-height:1.5;
+}
+
+/* ========================================= */
+/* CLOSE BUTTON */
+/* ========================================= */
+
+.closeBtn{
+
+    position:absolute;
+
+    top:12px;
+    right:12px;
+
+    width:34px;
+    height:34px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#222;
+
+    color:white;
+
+    cursor:pointer;
+}
+
+/* ========================================= */
+/* LABELS */
+/* ========================================= */
+
+#campusLabel{
+
+    position:absolute;
+
+    bottom:12px;
+    left:12px;
+
+    background:rgba(0,0,0,0.65);
+
+    color:white;
+
+    padding:8px 12px;
+
+    border-radius:8px;
+
+    z-index:20;
+}
+
+#northIndicator{
+
+    position:absolute;
+
+    bottom:12px;
+    left:140px;
+
+    background:rgba(0,0,0,0.65);
+
+    color:white;
+
+    padding:8px 12px;
+
+    border-radius:8px;
+
+    z-index:20;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="gameFrame">
+
+    <!-- UNITY -->
+    <canvas id="unityCanvas"></canvas>
+
+    <!-- MENU BUTTON -->
+    <button id="menuBtn"
+            onclick="toggleMenu()">
+
+        ☰
+
+    </button>
+
+    <!-- SIDE MENU -->
+    <div id="sideMenu"
+         class="sideMenu hidden">
+
+        <div class="menuHeader">
+
+            <h2>Menu</h2>
+
+            <button class="closeBtn"
+                    onclick="toggleMenu()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <button class="menuItem"
+                onclick="toggleControls()">
+
+            Controls
+
+        </button>
+
+        <button class="menuItem"
+                onclick="showMap()">
+
+            Map
+
+        </button>
+
+        <button class="menuItem"
+                onclick="toggleTeleportMode()">
+
+            Teleport Mode
+
+        </button>
+
+        <button class="menuItem"
+                onclick="restartUnity()">
+
+            Restart
+
+        </button>
+
+        <button class="menuItem"
+                onclick="exitToIndex()">
+
+            Exit
+
+        </button>
+
+    </div>
+
+    <!-- MAP -->
+    <div id="mapOverlay">
+
+        <div id="mapContainer">
+
+            <div id="topBar">
+
+                <button id="modeButton"
+                        class="uiButton"
+                        onclick="toggleTeleportMode()">
+
+                    Mode: Directions Only
+
+                </button>
+
+                <button class="uiButton"
+                        onclick="HideMap()">
+
+                    Close Map
+
+                </button>
+
+            </div>
+
+            <div id="map"></div>
+
+            <div id="directionBox">
+
+                Select a location marker.
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CONTROLS -->
+    <div id="controlsOverlay"
+         class="overlay hidden">
+
+        <div class="overlayBox">
+
+            <button class="closeBtn"
+                    onclick="toggleControls()">
+
+                ✕
+
+            </button>
+
+            <h2>Controls</h2>
+
+            <pre>
+Movement:
+W / Q / S / E or Arrow Keys → Move
+A / D or ← / → Arrow Keys → Rotate / Look
+Mouse → Rotate / Free Look
+
+Space → Jump / Fly Up
+C → Fly Down
+
+Modes:
+Hold Shift → Sprint
+Right Shift → Toggle Arrow Mode (Rotate vs Strafe)
+Double Space → Fly
+
+V → Camera Switch
+
+M → Open Map
+F → Use Doors
+T → Return To Start
+
+ESC → Open / Close Menu
+
+Map:
+Click Markers → Teleport To Location
+Toggle Teleport Mode → Switch Between Instant Teleport and Guide Mode (Shows Path To Location)
+            </pre>
+
+        </div>
+
+    </div>
+
+    <!-- LABELS -->
+    <div id="campusLabel">
+        Campus
+    </div>
+
+    <div id="northIndicator">
+        N ↑
+    </div>
+
+</div>
+
+<script src="Build/MyA3.loader.js"></script>
+<script src="map-bridge.js"></script>
+
+<script>
+
+let unityInstanceGlobal = null;
+
+let menuOpen = false;
+let controlsOpen = false;
+
+createUnityInstance(
+    document.querySelector("#unityCanvas"),
+{
+    dataUrl: "Build/MyA3.data.unityweb",
+    frameworkUrl: "Build/MyA3.framework.js.unityweb",
+    codeUrl: "Build/MyA3.wasm.unityweb",
+
+    streamingAssetsUrl: "StreamingAssets",
+
+    companyName: "VRProject",
+    productName: "TravelApp",
+    productVersion: "1.0"
+
+}).then((instance)=>{
+
+    unityInstanceGlobal = instance;
+
+    console.log("✅ Unity Loaded");
+
+    if(window.setUnityInstance){
+
+        window.setUnityInstance(instance);
+    }
+});
+
+function setPlayerFacing(direction){
+
+    playerFacing = direction;
+
+    console.log("🧭 Player facing:", direction);
+}
+
+window.setPlayerFacing = setPlayerFacing;
+
+function updateCompass(){
+
+    document.getElementById("northIndicator").innerHTML =
+        "N ↑<br>Facing: " + playerFacing.toUpperCase();
+}
+
+setInterval(updateCompass, 1000);
+
+/* ========================================= */
+/* MENU */
+/* ========================================= */
+
+function openMenu(){
+
+    menuOpen = true;
+
+    document.getElementById("sideMenu")
+    .classList.remove("hidden");
+
+    document.exitPointerLock?.();
+
+    document.body.style.cursor = "default";
+
+    console.log("📖 Menu Opened");
+}
+
+function closeMenu(){
+
+    menuOpen = false;
+
+    document.getElementById("sideMenu")
+    .classList.add("hidden");
+
+    console.log("❌ Menu Closed");
+}
+
+function toggleMenu(){
+
+    if(menuOpen){
+
+        closeMenu();
+
+    } else {
+
+        openMenu();
+    }
+}
+
+/* ========================================= */
+/* CONTROLS */
+/* ========================================= */
+
+function toggleControls(){
+
+    controlsOpen = !controlsOpen;
+
+    const overlay =
+        document.getElementById("controlsOverlay");
+
+    if(controlsOpen){
+
+        overlay.classList.remove("hidden");
+
+    } else {
+
+        overlay.classList.add("hidden");
+    }
+}
+
+/* ========================================= */
+/* OTHER ACTIONS */
+/* ========================================= */
+
+function restartUnity(){
+
+    stopNarration();
+    location.reload();
+}
+
+function exitToIndex(){
+
+    stopNarration();
+    window.location.href = "index.html";
+}
+
+/* ========================================= */
+/* ESC */
+/* ========================================= */
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.key === "Escape"){
+
+        e.preventDefault();
+
+        toggleMenu();
+    }
+});
+
+/* ========================================= */
+/* GAME FOCUS */
+/* ========================================= */
+
+document.getElementById("unityCanvas")
+.addEventListener("click",()=>{
+
+    if(!menuOpen){
+
+        document.body.style.cursor = "none";
+
+        console.log("🎮 Game Focused");
+    }
+});
+
+</script>
+
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArAg0vdD_tV4QTlkltyzAUt3VuZ-58410&callback=initMap">
+</script>
+
+</body>
+</html>
